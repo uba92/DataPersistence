@@ -23,7 +23,10 @@ public class EventoDAO {
             em.getTransaction().commit();
         }
         catch (Exception e) {
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
         }
     }
 
